@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+
+  "name": "用谷歌百度一下！",
+  "description": "修改百度为谷歌主题，可以假装自己在使用谷歌搜索！",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "static/icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.baidu.com/*"],
+      "css": ["static/main.css"],
+      "js": ["static/main.js"]
+    }
+  ],
+  "permissions": [],
+  "web_accessible_resources": [
+    "static/main.css"
+  ]
+}
