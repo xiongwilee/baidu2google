@@ -7,19 +7,19 @@
   "homepage_url":"https://github.com/xiongwilee/baidu2google",
   "icons": 
   { 
-    "16": "static/icon.png",             
-    "48": "static/icon.png",            
-    "128": "static/icon.png" 
+    "16": "static/image/icon.png",
+    "48": "static/image/icon.png",
+    "128": "static/image/icon.png"
   },
   "content_scripts": [
     {
       "matches": ["https://www.baidu.com/*"],
-      "js": ["static/main.js"]
+      "js": ["static/js/main.js"]
     }
   ],
   "permissions": [],
   "web_accessible_resources": [
-    "static/main.css",
-    "static/new_baidu_favicon.ico"
+    "static/css/main_index_no_login.css",
+    "static/image/new_baidu_favicon.ico"
   ]
 }

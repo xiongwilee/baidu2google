@@ -3,6 +3,21 @@
  * @author xiongwilee
  */
 var setTheme = (function () {
+	var Base = {
+		isLogindPage : function(){
+			return !!(document.getElementById('s_username_top') || document.getElementById('user'))
+		},
+		isResultPage : function(){
+			return !!document.getElementById('page')
+		},
+		isShowTheme : function(){
+			var isLogind = Base.isLogindPage(),
+				isResult = Base.isResultPage();
+
+			return !isLogind && !isResult;
+		}
+	}
+
 	var SetTheme = function(){
 		this.linkDOM;
 	}
@@ -10,13 +25,10 @@ var setTheme = (function () {
 	SetTheme.prototype.init = function(){
 		// 载入CSS
 		this.initCSS();
-
 		// 设置头部：标题等
 		this.setTitle();
-
 		// 设置favicon
 		this.setFavicon();
-
 		// 事件监听
 		this.bindEvent();
 	}
@@ -25,11 +37,11 @@ var setTheme = (function () {
 	 */
 	SetTheme.prototype.initCSS = function(){
 		// 如果已经登录就不加载CSS
-		if(document.getElementById('s_username_top')){
+		if( !Base.isShowTheme() ){
 			return;
 		}
 
-		var cssURL = chrome.extension.getURL('static/main.css');
+		var cssURL = chrome.extension.getURL('static/css/main_index_no_login.css');
 			
 		this.linkDOM = document.createElement('link');
 		this.linkDOM.rel = 'stylesheet';
@@ -54,19 +66,21 @@ var setTheme = (function () {
 	 */
 	SetTheme.prototype.setFavicon = function () {
 		var oldIcon = document.getElementsByTagName('link')[0];
-		var newIcon = chrome.extension.getURL('static/new_baidu_favicon.ico');
-		oldIcon.setAttribute("href",newIcon);
+		var newIcon = chrome.extension.getURL('static/image/new_baidu_favicon.ico');
+
+		if( Base.isShowTheme() ){ 
+			oldIcon,oldIcon.href = newIcon;
+		}
 	}
 	/**
 	 * 监听事件
 	 */
 	SetTheme.prototype.bindEvent = function(){
-		var me = this,
-			$wrapper = document.getElementById('wrapper');
+		var me = this;
 
 		// 当输入内容，切搜索视图变化的时候就删掉CSS
 		document.getElementById('kw').addEventListener('keyup', function(){
-			if($wrapper.classList.contains('wrapper_l')){
+			if( Base.isResultPage() ){
 				me.removeCSS();
 			}
 		})

@@ -150,6 +150,7 @@
 }
 #form span.s_btn_wr{
 	width: 100%;
+	padding-top: 18px;
     text-align: center;
 }
 #form span.s_btn_wr input{
@@ -213,6 +214,15 @@
     text-align: center;
     vertical-align: top;
     letter-spacing: 1px;
+}
+#form .bdsug, #fm .bdsug{
+	top:41px
+}
+#form .bdsug{
+	width: 584px;
+}
+#form .bdsug li{
+	width: 568px
 }
 
 /*底部*/
