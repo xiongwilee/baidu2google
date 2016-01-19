@@ -14,6 +14,9 @@ var setTheme = (function () {
 		// 设置头部：标题等
 		this.setTitle();
 
+		// 设置favicon
+		this.setFavicon();
+
 		// 事件监听
 		this.bindEvent();
 	}
@@ -45,6 +48,14 @@ var setTheme = (function () {
 	 */
 	SetTheme.prototype.setTitle = function(){
 		document.title = 'Google';
+	}
+	/**
+	 设置favicon
+	 */
+	SetTheme.prototype.setFavicon = function () {
+		var oldIcon = document.getElementsByTagName('link')[0];
+		var newIcon = chrome.extension.getURL('static/new_baidu_favicon.ico');
+		oldIcon.setAttribute("href",newIcon);
 	}
 	/**
 	 * 监听事件

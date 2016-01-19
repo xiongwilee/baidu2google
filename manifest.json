@@ -19,6 +19,7 @@
   ],
   "permissions": [],
   "web_accessible_resources": [
-    "static/main.css"
+    "static/main.css",
+    "static/new_baidu_favicon.ico"
   ]
 }
