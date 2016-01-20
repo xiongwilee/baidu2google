@@ -8,7 +8,7 @@ var setTheme = (function () {
 			return !!(document.getElementById('s_username_top') || document.getElementById('user'))
 		},
 		isResultPage : function(){
-			return !!document.getElementById('page')
+			return !!document.getElementById('wrapper').classList.contains('wrapper_l');
 		},
 		isShowTheme : function(){
 			var isLogind = Base.isLogindPage(),
@@ -20,9 +20,12 @@ var setTheme = (function () {
 
 	var SetTheme = function(){
 		this.linkDOM;
+		this.stat;
 	}
 
 	SetTheme.prototype.init = function(){
+		// 获取默认状态并存到this.stat变量中
+		this.stat = this.getStatus();
 		// 载入CSS
 		this.initCSS();
 		// 设置头部：标题等
@@ -33,21 +36,50 @@ var setTheme = (function () {
 		this.bindEvent();
 	}
 	/**
+	 * 获取当前状态
+	 */
+	SetTheme.prototype.getStatus = function(){
+		var curStatus = {};
+
+		curStatus.isLogind = Base.isLogindPage();
+		curStatus.isResult = Base.isResultPage();
+
+		if(!curStatus.isLogind && !curStatus.isResult){
+			curStatus.css = chrome.extension.getURL('static/css/main_index_no_login.css')
+		}else if(curStatus.isResult){
+			curStatus.css = chrome.extension.getURL('static/css/main_result.css')
+		}else{
+			curStatus.css = '';
+		}
+
+		return curStatus
+	}
+	/**
+	 * 当状态发生变化时
+	 */
+	SetTheme.prototype.onChangeStatus = function(){
+		var curStatus = this.getStatus();
+console.log(curStatus, this.stat, '11');
+		if(	curStatus.isLogind != this.stat.isLogind 
+			|| curStatus.isResult != this.stat.isResult){
+			this.linkDOM.href = curStatus.css;
+			this.stat = curStatus;
+		}
+	}
+	/**
 	 * 载入CSS
 	 */
 	SetTheme.prototype.initCSS = function(){
-		// 如果已经登录就不加载CSS
-		if( !Base.isShowTheme() ){
+		// 如果状态中获取不到CSS就不用再加载
+		if( !this.stat.css ){
 			return;
 		}
-
-		var cssURL = chrome.extension.getURL('static/css/main_index_no_login.css');
 			
 		this.linkDOM = document.createElement('link');
 		this.linkDOM.rel = 'stylesheet';
-		this.linkDOM.href = cssURL;
+		this.linkDOM.href = this.stat.css;
 
-		document.body.appendChild(this.linkDOM);
+		document.head.appendChild(this.linkDOM);
 	}
 	/**
 	 * 删除CSS
@@ -68,7 +100,7 @@ var setTheme = (function () {
 		var oldIcon = document.getElementsByTagName('link')[0];
 		var newIcon = chrome.extension.getURL('static/image/new_baidu_favicon.ico');
 
-		if( Base.isShowTheme() ){ 
+		if( this.stat.isResult || !this.stat.isLogind ){ 
 			oldIcon,oldIcon.href = newIcon;
 		}
 	}
@@ -80,9 +112,7 @@ var setTheme = (function () {
 
 		// 当输入内容，切搜索视图变化的时候就删掉CSS
 		document.getElementById('kw').addEventListener('keyup', function(){
-			if( Base.isResultPage() ){
-				me.removeCSS();
-			}
+			me.onChangeStatus();
 		})
 	}
 
