@@ -4,17 +4,13 @@
  */
 var setTheme = (function () {
 	var Base = {
+		// 当前是否为已经登录的页面
 		isLogindPage : function(){
 			return !!(document.getElementById('s_username_top') || document.getElementById('user'))
 		},
+		// 当前是否为搜索结果页
 		isResultPage : function(){
 			return !!document.getElementById('wrapper').classList.contains('wrapper_l');
-		},
-		isShowTheme : function(){
-			var isLogind = Base.isLogindPage(),
-				isResult = Base.isResultPage();
-
-			return !isLogind && !isResult;
 		}
 	}
 
@@ -79,12 +75,6 @@ var setTheme = (function () {
 		document.head.appendChild(this.linkDOM);
 	}
 	/**
-	 * 删除CSS
-	 */
-	SetTheme.prototype.removeCSS = function(){
-		this.linkDOM && this.linkDOM.remove();
-	}
-	/**
 	 * 设置头部：标题等
 	 */
 	SetTheme.prototype.setTitle = function(){
@@ -119,6 +109,9 @@ var setTheme = (function () {
 			me.onChangeStatus();
 		})
 	}
+	/**
+	 * 在百度搜索框里输入完之后，回车会删除所有DOM，设置轮询检测是否CSS DOM是否已经删除
+	 */
 	SetTheme.prototype.setTimer = function(){
 		var me = this;
 
