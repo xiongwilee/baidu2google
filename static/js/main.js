@@ -21,6 +21,7 @@ var setTheme = (function () {
 	var SetTheme = function(){
 		this.linkDOM;
 		this.stat;
+		this.timer;
 	}
 
 	SetTheme.prototype.init = function(){
@@ -34,6 +35,8 @@ var setTheme = (function () {
 		this.setFavicon();
 		// 事件监听
 		this.bindEvent();
+		// 在百度搜索框里输入完之后，回车会删除所有DOM，设置轮询检测是否CSS DOM是否已经删除
+		this.setTimer();
 	}
 	/**
 	 * 获取当前状态
@@ -59,7 +62,6 @@ var setTheme = (function () {
 	 */
 	SetTheme.prototype.onChangeStatus = function(){
 		var curStatus = this.getStatus();
-console.log(curStatus, this.stat, '11');
 		if(	curStatus.isLogind != this.stat.isLogind 
 			|| curStatus.isResult != this.stat.isResult){
 			this.linkDOM.href = curStatus.css;
@@ -69,13 +71,8 @@ console.log(curStatus, this.stat, '11');
 	/**
 	 * 载入CSS
 	 */
-	SetTheme.prototype.initCSS = function(){
-		// 如果状态中获取不到CSS就不用再加载
-		if( !this.stat.css ){
-			return;
-		}
-			
-		this.linkDOM = document.createElement('link');
+	SetTheme.prototype.initCSS = function(){			
+		this.linkDOM = this.linkDOM || document.createElement('link');
 		this.linkDOM.rel = 'stylesheet';
 		this.linkDOM.href = this.stat.css;
 
@@ -97,8 +94,15 @@ console.log(curStatus, this.stat, '11');
 	 设置favicon
 	 */
 	SetTheme.prototype.setFavicon = function () {
-		var oldIcon = document.getElementsByTagName('link')[0];
+		var oldIcon = document.querySelector('link[type="image/x-icon"]');
 		var newIcon = chrome.extension.getURL('static/image/new_baidu_favicon.ico');
+
+		if( !oldIcon ){
+			oldIcon = document.createElement('link');
+			oldIcon.type = 'image/x-icon';
+			oldIcon.rel = 'shortcut icon';
+			document.head.appendChild(oldIcon);
+		}
 
 		if( this.stat.isResult || !this.stat.isLogind ){ 
 			oldIcon,oldIcon.href = newIcon;
@@ -114,6 +118,18 @@ console.log(curStatus, this.stat, '11');
 		document.getElementById('kw').addEventListener('keyup', function(){
 			me.onChangeStatus();
 		})
+	}
+	SetTheme.prototype.setTimer = function(){
+		var me = this;
+
+		clearInterval(this.timer);
+		me.timer = setInterval(function(){
+			if (!!me.linkDOM.parentNode) {return};
+
+			me.initCSS();
+			me.setTitle();
+			me.setFavicon();
+		},500);
 	}
 
 	return (new SetTheme());
