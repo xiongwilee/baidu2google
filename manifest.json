@@ -14,7 +14,8 @@
   "content_scripts": [
     {
       "matches": ["https://www.baidu.com/*"],
-      "js": ["static/js/main.js"]
+      "js": ["static/js/main.js"],
+      "run_at":"document_end"
     }
   ],
   "permissions": [],

@@ -32,7 +32,7 @@ var setTheme = (function () {
 		// 事件监听
 		this.bindEvent();
 		// 在百度搜索框里输入完之后，回车会删除所有DOM，设置轮询检测是否CSS DOM是否已经删除
-		this.setTimer();
+		// this.setTimer();
 	}
 	/**
 	 * 获取当前状态
@@ -72,13 +72,27 @@ var setTheme = (function () {
 		this.linkDOM.rel = 'stylesheet';
 		this.linkDOM.href = this.stat.css;
 
-		document.head.appendChild(this.linkDOM);
+		// 把link文件放在</body>和</html>之间，以避免回车搜索时干掉DOM
+		document.body.parentElement.appendChild(this.linkDOM);
 	}
 	/**
 	 * 设置头部：标题等
 	 */
 	SetTheme.prototype.setTitle = function(){
-		document.title = 'Google';
+		var title;
+		switch(true){
+			case document.title.indexOf('_百度搜索') > -1:
+				title = document.title.replace('_百度搜索','_Google');
+				break;
+			case document.title == '百度一下，你就知道':
+				title = 'Google';
+				break;
+			default:
+				title = document.title;
+				break;
+		}
+
+		document.title = title;
 	}
 	/**
 	 设置favicon
@@ -107,6 +121,13 @@ var setTheme = (function () {
 		// 当输入内容，切搜索视图变化的时候就删掉CSS
 		document.getElementById('kw').addEventListener('keyup', function(){
 			me.onChangeStatus();
+		})
+
+		document.getElementById('form').addEventListener('submit', function(){
+			setTimeout(function(){
+				me.setTitle();
+			},500);
+			me.setFavicon();
 		})
 	}
 	/**
