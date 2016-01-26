@@ -27,4 +27,4 @@
 
 ## 预览
 
-![baidu2google](https://github.com/xiongwilee/baidu2google/blob/master/static/image/baidu2google.png?raw=true)
+![baidu2google](https://github.com/xiongwilee/baidu2google/blob/master/static/images/baidu2google.png?raw=true)
