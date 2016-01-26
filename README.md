@@ -10,7 +10,7 @@
 
 ### 一、Chrome网上应用商店安装：
 
-[https://chrome.google.com/webstore/detail/%E7%94%A8%E8%B0%B7%E6%AD%8C%E7%99%BE%E5%BA%A6%E4%B8%80%E4%B8%8B%EF%BC%81/ekbeedinaadojmejbpkbckcpakmgeohl/](https://chrome.google.com/webstore/detail/%E7%94%A8%E8%B0%B7%E6%AD%8C%E7%99%BE%E5%BA%A6%E4%B8%80%E4%B8%8B%EF%BC%81/ekbeedinaadojmejbpkbckcpakmgeohl/)
+[https://chrome.google.com/webstore/detail/用谷歌百度一下！/ekbeedinaadojmejbpkbckcpakmgeohl/](https://chrome.google.com/webstore/detail/%E7%94%A8%E8%B0%B7%E6%AD%8C%E7%99%BE%E5%BA%A6%E4%B8%80%E4%B8%8B%EF%BC%81/ekbeedinaadojmejbpkbckcpakmgeohl/)
 
 1. 访问以上连接
 2. 点击“添加至chrome”即可安装
