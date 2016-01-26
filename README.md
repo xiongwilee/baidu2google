@@ -17,7 +17,7 @@
 
 ### 二、手动安装：
 
-[https://github.com/xiongwilee/baidu2google/blob/master/baidu2google.crx?raw=true](https://github.com/xiongwilee/baidu2google/blob/master/baidu2google.crx?raw=true)
+[https://github.com/xiongwilee/baidu2google/blob/master/dist.crx?raw=true](https://github.com/xiongwilee/baidu2google/blob/master/dist.crx?raw=true)
 
 1. 点击上面的链接下载`baidu2google.crx`文件；
 2. 然后在chrome中打开`扩展程序`页 （ 可以直接访问：[chrome://extensions/](chrome://extensions/) ）
