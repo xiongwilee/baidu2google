@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "用谷歌百度一下！",
   "description": "修改百度为谷歌主题，可以假装自己在使用谷歌搜索！",
-  "version": "1.0",
+  "version": "1.2",
   "homepage_url":"https://github.com/xiongwilee/baidu2google",
   "icons": 
   { 

@@ -1,8 +1,17 @@
 /*wrapper*/
+*{
+	font-family: arial,sans-serif;
+}
 #wrapper{
-	margin-top: 30px;
+	/*margin-top: 30px;*/
+	margin-top: 0px;
+}
+#content_left{
 }
 /*顶部*/
+#u {
+	display: none;
+}
 #u,#u1{
 	position: absolute;
 	width: 100%;
@@ -107,14 +116,16 @@
 /*搜索框*/
 #head{
 	position: relative;
+	border: none;
+}
+#head .headBlock {
+	display: none!important;
 }
 #head .s_form{
 	padding: 0px;
 	height: 69px;
 
-	background-color: #f1f1f1;
-    background-image: -webkit-gradient(radial,100 36,0,100 -40,120,from(#fafafa),to(#f1f1f1));
-    border-color: #e5e5e5;
+	background-color: #fafafa;
 }
 #head #result_logo{
 	display: inline-block;
@@ -133,13 +144,20 @@
 #form{
 	margin: 19px 0 0 10px
 }
-#form span.s_ipt_wr,#form span.s_btn_wr{
+#form span.s_ipt_wr, #form span.s_btn_wr{
 	display: inline-block;
 }
-#form span.s_ipt_wr{
-	width: 584px;
-	height: 38px;
-	border:1px solid #d9d9d9;
+#form span.s_ipt_wr{    
+	padding-bottom: 2px;
+    padding-top: 3px;
+    margin-top: -3px;
+    width: 632px;
+    height: 37px;
+    vertical-align: top;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    border-color: transparent;
+    transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
 	background: #ffffff;
 }
 #quickdelete{
@@ -150,9 +168,12 @@
 	position: absolute;
     margin: 0px;
     top: 5px;
-    left: 8px;
-    height: 30px;
-    width: 540px;
+    left: 19px;
+    width: 610px;
+
+    font: 16px arial,sans-serif;
+    line-height: 34px;
+    height: 34px !important;
 }
 #form span.s_ipt_wr span{
 	right: 10px;
@@ -166,37 +187,33 @@
     width: 17px;
     vertical-align: middle;
 }
+#form span.s_ipt_wr .ipt_rec{
+	display: none!important;
+}
+#form span.s_ipt_wr .soutu-btn{
+	display: none!important;	
+}
 #form span.ipthover{
-	border: 1px solid #b9b9b9;
-    border-top-color: #a0a0a0;
 }
 #form span.iptfocus{
-	border: 1px solid #4d90fe
+	border-color: transparent; 
 }
 #form span.s_btn_wr input{
-    color:#4285f4;
-
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
-    height: 40px;
-    margin: 0;
-    padding: 0;
-    width: 40px;
-    min-width: 38px !important;
-    background-color: #4285f4;
-    background-image: none;
-    border: none;
-    border-radius: 0px 2px 2px 0px;
-	background-position: -107px -55px;
-	background-repeat: no-repeat;
+	display: none;
 }
 #form .bdsug{
-	top: 39px;
-	width: 584px;
+	top: 41px;
+    width: 631px;
+}
+#form .bdsug li{
+	width: 615px;
 }
 /*s_tab*/
 #s_tab{
-	background: #ffffff;
+	background: #fafafa;
 	padding:5px 0 0 121px;
 	border-bottom: 1px solid #ebebeb
+}
+#s_tab a, #s_tab b{
+	font-size: 13px;
 }
